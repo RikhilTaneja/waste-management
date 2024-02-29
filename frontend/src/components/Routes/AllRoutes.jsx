@@ -7,6 +7,7 @@ import Complaint from '../Complaint'
 
 import SocietyRegister from '../SocietyRegister'
 import Login from '../Login'
+import Educational from '../Educational'
 
 
 const AllRoutes = () => {
@@ -19,6 +20,7 @@ const AllRoutes = () => {
 
       <Route path='/login' element={<Login/>}/>
       <Route path='/society/signup' element={<SocietyRegister/>}/>
+      <Route path='/education' element={<Educational/>}/>
       
 
 
