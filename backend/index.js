@@ -33,6 +33,7 @@ app.get("/", (req, res) => {
 app.use("/services", service);
 app.use("/user", userControl);
 app.use("/society", societyControl);
+app.use("/complaint", societyControl);
 
 app.listen(8080, () => {
   console.log("Listening on Port 8080");
