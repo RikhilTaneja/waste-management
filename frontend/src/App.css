@@ -43,5 +43,84 @@
 }
 .nav-div {
   /* remove this line */
-  text-align: center;  
+  text-align: center;
+}
+.tag-heading {
+  font-size: 2.5vmax;
+  font-weight: 700;
+}
+.tag-subHeading {
+  font-size: 1.2vmax;
+}
+.tag-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.complaint-box {
+  line-height: 3vmax;
+  display: flex;
+  flex-direction: column;
+
+  gap: 2vmax;
+}
+.complaint-parent {
+  flex: 1;
+  padding: 0.5vmax;
+  display: flex;
+  flex-direction: column;
+  gap: 3vmax;
+}
+.next-button {
+  display: flex;
+  justify-content: flex-end;
+}
+.button-div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2vmax;
+}
+.progress-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.progress-bar {
+  /* border: 2px blue solid; */
+  background-color: aliceblue;
+  height: 2vh;
+  width: 80vw;
+}
+.progress {
+  height: 100%;
+  background-color: rgb(255, 104, 104);
+}
+.form-parent {
+  flex: 1;
+  padding: 5vmin 10vmin;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* background-color: aliceblue; */
+  /* color: rgb(198, 232, 255); */
+}
+.buttons {
+  display: flex;
+  gap: 1vmax;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70vw;
+  padding: 2vmin;
+  border-radius: 10px;
+  background-color: rgb(213, 227, 239);
+  gap: 2vmin;
+}
+.err {
+  color: red;
+  font-size: 1.5vmin;
+  margin-top: 0.5vmin;
 }
