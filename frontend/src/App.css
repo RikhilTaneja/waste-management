@@ -34,6 +34,7 @@
   font-size: 1.5vmin;
   margin-top: 0.5qvmin;
 }
+/* NavBar */
 .nav-box {
   position: sticky;
   top: 0;
@@ -45,6 +46,8 @@
   /* remove this line */
   text-align: center;
 }
+
+/* Complaint */
 .tag-heading {
   font-size: 2.5vmax;
   font-weight: 700;
@@ -123,4 +126,24 @@
   color: red;
   font-size: 1.5vmin;
   margin-top: 0.5vmin;
+}
+
+/* Educational */
+
+.edu-parent {
+  flex: 1;
+  padding: 4vmax;
+}
+.edu-div {
+  border: 2px red solid;
+}
+.content {
+  display: flex;
+  padding: 1.5vmax;
+}
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1vmax;
 }
