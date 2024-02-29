@@ -17,3 +17,10 @@ module.exports.societyValidation = Joi.object({
     reviews: Joi.array(),
     residents: Joi.number().required()
 })
+
+module.exports.complaintValidation = Joi.object({
+    title: Joi.string().required(),
+    body: Joi.string().required(),
+    address: Joi.string().required(),
+    resolved: Joi.boolean()
+})
