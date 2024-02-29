@@ -192,4 +192,4 @@ complaintControl.post("/new", validateComplaint, wrapAsync(async (req, res) => {
     res.send("Success!")
 }))
 
-module.exports = { userControl, societyControl, service, complaintControl };
+module.exports = { userControl, societyControl, service };
