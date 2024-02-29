@@ -2,30 +2,45 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { FormControl, FormLabel, Input, Text, Button } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Text,
+  Button,
+  Select,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
-
-
-
+import { useEffect, useState } from "react";
 
 export default function Signup() {
   const navigate = useNavigate();
+  const [society, setSociety] = useState([]);
   const {
     register,
     handleSubmit,
     watch,
     reset,
+    setValue,
     formState: { errors },
   } = useForm();
+  useEffect(() => {
+    axios
+      .get("https://waste-management-theta.vercel.app/society")
+      .then((res) => [
+        // console.log(res.data)
+        setSociety(res.data),
+      ]);
+  }, []);
+
   // console.log(watch())
   const FormSubmitHandler = (formData) => {
     console.log(formData);
     const id = toast.loading("Signing Up...");
     setTimeout(() => {
       axios
-        .post("", formData)
+        .post("https://waste-management-theta.vercel.app/user/signup", formData)
         .then((result) => {
           console.log("ADDED");
           toast.update(id, {
@@ -33,9 +48,9 @@ export default function Signup() {
             type: "success",
             isLoading: false,
           });
-          setLogin(loginCheck())
+
           setTimeout(() => {
-            navigate("");
+            navigate("/");
           }, 1200);
         })
         .catch((err) => {
@@ -106,7 +121,6 @@ export default function Signup() {
             })}
           />
           <p className="err">{errors.password?.message}</p>
-
         </FormControl>
         <FormControl>
           <FormLabel fontSize="1.2vmax" as="i" fontWeight="550">
@@ -123,6 +137,22 @@ export default function Signup() {
         </FormControl>
         <FormControl>
           <FormLabel fontSize="1.2vmax" as="i" fontWeight="550">
+            Society
+          </FormLabel>
+          <Select
+            placeholder="Select option"
+            {...register("society", {
+              required: "Society is required",
+            })}
+          >
+            {society.map((e) => {
+              return <option value={e.name}>{e.name}</option>;
+            })}
+          </Select>
+          <p className="err">{errors.society?.message}</p>
+        </FormControl>
+        <FormControl>
+          <FormLabel fontSize="1.2vmax" as="i" fontWeight="550">
             Phone no.
           </FormLabel>
           <Input
@@ -135,7 +165,7 @@ export default function Signup() {
                 message: "Minimum 10 digits required",
               },
               maxLength: {
-                value: 8,
+                value: 10,
                 message: "Maximum 10 digits required",
               },
             })}
@@ -159,7 +189,18 @@ export default function Signup() {
           Submit
         </Button>
       </form>
-      <Link to="/login" style={{fontSize:"2vmin",color:"lightblue",textDecoration:"underline",textAlign:"center",paddingTop:"1vmax"}}>Already a user?Login here...</Link>
+      <Link
+        to="/login"
+        style={{
+          fontSize: "2vmin",
+          color: "lightblue",
+          textDecoration: "underline",
+          textAlign: "center",
+          paddingTop: "1vmax",
+        }}
+      >
+        Already a user?Login here...
+      </Link>
     </div>
   );
 }

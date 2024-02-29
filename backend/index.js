@@ -10,6 +10,7 @@ require("dotenv").config();
 
 // making incoming data as in json format
 app.use(express.json())
+app.use(cors())
 
 main()
   .then(() => {
