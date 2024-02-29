@@ -22,5 +22,6 @@ module.exports.complaintValidation = Joi.object({
     title: Joi.string().required(),
     body: Joi.string().required(),
     address: Joi.string().required(),
-    resolved: Joi.boolean()
+    resolved: Joi.boolean(),
+    image: Joi.string().required(),
 })
