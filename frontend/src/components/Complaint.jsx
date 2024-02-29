@@ -16,6 +16,8 @@ import { useNavigate } from "react-router-dom";
 export default function Complaint() {
   const [count, setCount] = useState(1);
   const [length, setLength] = useState(10);
+  const [image, setImage] = useState("");
+
   function nextDetail() {
     setCount(count + 1);
     setLength((count + 1) * length);
@@ -31,6 +33,7 @@ export default function Complaint() {
     reset,
     formState: { errors },
   } = useForm();
+
   // console.log(watch())
   //   const FormSubmitHandler = (data) => {
   //     axios
@@ -43,6 +46,39 @@ export default function Complaint() {
   //         console.log(err);
   //       });
   //   };
+
+  function convertToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader()
+      fileReader.readAsDataURL(file)
+      fileReader.onload = () => {
+        resolve(fileReader.result)
+      }
+      fileReader.onerror = (error) => {
+        reject(error)
+      }
+    });
+  }
+
+  let base64;
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    base64 = await convertToBase64(file)
+  }
+
+  const imageFileUpload = () => {
+    setImage({...image, myFile:base64})
+    setImage((prevImage)=>{
+      return {
+        ...prevImage,
+        myFile: base64
+      };
+    })
+    console.log(image);
+  }
+  const lgog = () => {
+    console.log(image);
+  }
 
   function complaint() {
     switch (count) {
@@ -154,6 +190,42 @@ export default function Complaint() {
                       />
                       <p className="err">{errors.address?.message}</p>
                     </FormControl>
+                  </form>
+                </div>
+                <div className="next-button">
+                  <div className="buttons">
+                    <Button onClick={lastDetail}>Back</Button>
+
+                    <Button colorScheme="red" onClick={nextDetail}>
+                      Next
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        );
+        break;
+      case 3:
+        return(
+          <>
+            <div className="tag-line">
+              <div className="complaint-box">
+                <div className="tag-heading">Upload the image!</div>
+                <div className="tag-subHeading">
+                  It will help us find the spot fast without disturbing you!
+                </div>
+                <div className="form-parent">
+                  <form className="form" onSubmit={handleSubmit}>
+                  <input
+            type="file"
+            label="Image"
+            name="myFile"
+            id="file-upload"
+            accept=".jpeg, .png, .jpg"
+            onChange={(e)=>handleFileUpload(e)}
+          />
+                    <Button onClick={imageFileUpload}>Upload!</Button>
                   </form>
                 </div>
                 <div className="next-button">

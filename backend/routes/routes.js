@@ -8,15 +8,23 @@ const Society = require("../models/society");
 const ExpressError = require("../utils/ExpressError");
 const userControl = express.Router();
 const societyControl = express.Router();
+const complaintControl = express.Router();
 const service = express.Router();
 var jwt = require("jsonwebtoken");
-const { userValidation, societyValidation } = require("../utils/validation");
+const { userValidation, societyValidation, complaintValidation } = require("../utils/validation");
+const Complaint = require("../models/complaints");
 
 // making incoming data as in json format
-app.use(express.json())
-userControl.use(express.json())
-service.use(express.json())
-societyControl.use(express.json())
+app.use(express.json());
+userControl.use(express.json());
+service.use(express.json());
+societyControl.use(express.json());
+complaintControl.use(express.json());
+
+// for parsing more entities so that image can be covertede to Base64 format
+var bodyParser = require('body-parser');
+app.use(bodyParser.json({limit: "50mb"}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 
 
 // functions for verfications
@@ -32,6 +40,15 @@ const validateUser = (req, res, next) => {
 
 const validateSociety = (req, res, next) => {
     let { error } = societyValidation.validate(req.body);
+    if (error) {
+        throw new ExpressError(400, `joi, ${error}`);
+    } else {
+        next();
+    }
+};
+
+const validateComplaint = (req, res, next) => {
+    let { error } = complaintValidation.validate(req.body);
     if (error) {
         throw new ExpressError(400, `joi, ${error}`);
     } else {
@@ -164,5 +181,15 @@ societyControl.put("/edit/:id", validateSociety, wrapAsync(async (req, res) => {
     res.send("Updated!");
 }));
 
+// ========================================================
+// COMPLAINT ROUTES
+// ========================================================
 
-module.exports = { userControl, societyControl, service }
+complaintControl.post("/new", validateComplaint, wrapAsync(async (req, res) => {
+    let insertData = new Complaint(req.body);
+    await insertData.save();
+    console.log("Added");
+    res.send("Success!")
+}))
+
+module.exports = { userControl, societyControl, service };
