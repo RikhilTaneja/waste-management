@@ -1,28 +1,32 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const societySchema = new mongoose.Schema({
     name:{
         type:String,
-        required:true
+        required:true,
+        unique: true
     },
     location:{
         type:String,
         required:true
     },
     reviews:[
-        {body:{
-            type:String
-        },date:{
-            type:Date,
-            default: new Date()
-        }}
+        {
+            body:{
+                type:String
+            },
+            date:{
+                type:Date,
+                default: new Date()
+            }
+        }
     ],
     residents:{
         type: Number,
         required: true
     }
-})
+});
 
-const Society = new mongoose.model("Society",societySchema)
+const Society = mongoose.model("Society", societySchema);
 
-module.exports = Society
+module.exports = Society;
