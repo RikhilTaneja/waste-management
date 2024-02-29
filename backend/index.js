@@ -2,7 +2,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const {service, userControl, societyControl} = require("./routes/routes");
+const {service, userControl, societyControl, complaintControl} = require("./routes/routes");
 const cors = require("cors");
 
 // requiring ENV folder (environment variables)
@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 app.use("/services", service);
 app.use("/user", userControl);
 app.use("/society", societyControl);
-app.use("/complaint", societyControl);
+app.use("/complaint", complaintControl);
 
 app.listen(8080, () => {
   console.log("Listening on Port 8080");
