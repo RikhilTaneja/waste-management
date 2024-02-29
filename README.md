@@ -13,10 +13,12 @@ This project addresses the critical issue of improper waste disposal within resi
 - **Technology and Innovation:** Leveraging technology and innovation to streamline waste management processes and enhance efficiency.
   
 - **Infrastructure Improvement:** Advocating for improvements in waste management infrastructure to better serve residential areas.
+<br>
 
 ## Deployment Links
 - **Backend:** [https://backend-waste-management.vercel.app/](https://backend-waste-management.vercel.app/)
 - **Frontend:** *In progress....*
+<br>
 
 ## Features 
 - **Donations:** Accepting donations to fund waste management initiatives and infrastructure improvements.
@@ -34,6 +36,7 @@ This project addresses the critical issue of improper waste disposal within resi
 - **Promotion of Awareness:** Creating awareness through various channels such as social media, workshops, and educational materials.
   
 - **User Awareness Blog Posts:** Publishing blog posts to educate users about the importance of proper waste management and sustainable practices.
+<br>
 
 ## Developer Features
 - **Login/Logout:** Implementing authentication functionality to allow users to securely log in and out of the system.
@@ -46,4 +49,15 @@ This project addresses the critical issue of improper waste disposal within resi
   
 - **Third Party Website/App Integration:** Integrating with third-party websites or applications to leverage additional functionalities or data sources.
 
-Feel free to contribute to this project and help make our communities cleaner and healthier!
+<br>
+<br>
+
+
+## Flowchart Representation
+
+![image](https://github.com/RikhilTaneja/waste-management/assets/142983808/911a67f6-8108-4758-8b6b-8fd0f1759d81)
+
+<br>
+
+Project by - Rikhil, Aayush, Dwij, Pranshu
+Team ID - CB373
