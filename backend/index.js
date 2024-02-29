@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
-
+app.use(express.json())
 main()
   .then(() => {
     console.log("Connection Successful!");
