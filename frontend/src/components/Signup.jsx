@@ -12,7 +12,10 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { setCookie } from "../utils/cookie";
+import { AppContext } from "./Context";
+import { loginCheck } from "../utils/loginCheck";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -35,6 +38,7 @@ export default function Signup() {
   }, []);
 
   // console.log(watch())
+  const {login,setLogin} = useContext(AppContext)
   const FormSubmitHandler = (formData) => {
     console.log(formData);
     const id = toast.loading("Signing Up...");
@@ -42,7 +46,10 @@ export default function Signup() {
       axios
         .post("https://waste-management-theta.vercel.app/user/signup", formData)
         .then((result) => {
-          console.log("ADDED");
+          // console.log(result.data);
+          setCookie("username",formData.username,365)
+          setCookie("auth-token",result.data,365)
+          setLogin(loginCheck())
           toast.update(id, {
             render: "Signed Up",
             type: "success",
@@ -50,7 +57,7 @@ export default function Signup() {
           });
 
           setTimeout(() => {
-            navigate("/");
+            // navigate("/");
           }, 1200);
         })
         .catch((err) => {
@@ -145,8 +152,8 @@ export default function Signup() {
               required: "Society is required",
             })}
           >
-            {society.map((e) => {
-              return <option value={e.name}>{e.name}</option>;
+            {society.map((e,i) => {
+              return <option key={i} value={e.name}>{e.name}</option>;
             })}
           </Select>
           <p className="err">{errors.society?.message}</p>

@@ -6,6 +6,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { FormControl, FormLabel, Input, Text, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { setCookie } from "../utils/cookie";
+import { AppContext } from "./Context";
+import { loginCheck } from "../utils/loginCheck";
 
 
 
@@ -20,6 +23,7 @@ export default function Login() {
     formState: { errors },
   } = useForm();
   // console.log(watch())
+  const {login,setLogin} = useContext(AppContext)
   const FormSubmitHandler = (formData) => {
     // console.log(formData);
     const id = toast.loading("Logging In...");
@@ -27,7 +31,10 @@ export default function Login() {
       axios
         .post("https://waste-management-theta.vercel.app/user/login", formData)
         .then((result) => {
-          console.log("ADDED");
+          // console.log("ADDED");
+          setCookie("username",formData.username,365)
+          setCookie("auth-token",result.data,365)
+          setLogin(loginCheck())
           toast.update(id, {
             render: "Logged In!",
             type: "success",
