@@ -37,7 +37,7 @@ export default function CardDetail() {
   useEffect(() => {
     setTimeout(() => {
       axios
-        .get(`http://localhost:8080/society/details/${id}`)
+        .get(`https://waste-management-theta.vercel.app/society/details/${id}`)
         .then((res) => {
           console.log(res.data);
           setSocietyData(res.data.societyData);

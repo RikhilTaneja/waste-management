@@ -145,6 +145,15 @@ a6[data-active] {
   justify-content: flex-end;
 }
 
+#complaints-parent {
+  padding: 5vmax 2vmax;
+  gap: 10vw;
+}
+
+#complaints-header {
+  padding: 2vw;
+}
+
 .button-div {
   display: flex;
   flex-wrap: wrap;

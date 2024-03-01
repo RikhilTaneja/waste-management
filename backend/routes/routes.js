@@ -183,6 +183,11 @@ societyControl.get("/details/:id",async(req,res)=>{
 // COMPLAINT ROUTES
 // ========================================================
 
+complaintControl.get("/", wrapAsync(async (req, res) => {
+    const data = await Complaint.find();
+    res.send(data);
+}));
+
 complaintControl.post("/new", validateComplaint, wrapAsync(async (req, res) => {
     let insertData = new Complaint(req.body);
     await insertData.save();

@@ -39,7 +39,7 @@ app.use('/services', service);
 app.use('/user', userControl);
 app.use('/society', societyControl);
 app.use('/complaint', complaintControl);
-app.use('/pay',paymentRouter)
+app.use('/pay',paymentRouter);
 
 // Define a basic route
 app.get('/', (req, res) => {

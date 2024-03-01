@@ -10,6 +10,9 @@ import Educational from "../Educational";
 import Incentive from "../Incentive";
 import CardDetail from "../CardDetail";
 import PrivateAuthRoute from "./PrivateAuthRoute";
+import Complaints from "../Complaints";
+import Faq from "../faq";
+import About from "../About";
 
 const AllRoutes = () => {
   return (
@@ -32,6 +35,9 @@ const AllRoutes = () => {
       <PrivateAuthRoute>
       <Incentive />
       </PrivateAuthRoute>}/>
+      <Route path="/complaints" element={<Complaints />} />
+      <Route path="/faq" element={<Faq />} />
+      <Route path="/about" element={<About />} />
       <Route path="/incentive/society/:id" element={<CardDetail />} />
     </Routes>
   );
