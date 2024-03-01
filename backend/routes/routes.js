@@ -25,7 +25,8 @@ complaintControl.use(express.json());
 var bodyParser = require('body-parser');
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
-
+complaintControl.use(bodyParser.json({limit: "50mb"}));
+complaintControl.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 
 // functions for verfications
 
@@ -152,8 +153,8 @@ societyControl.post("/new", validateSociety, wrapAsync(async (req, res) => {
 // route for getting all society
 
 societyControl.get("/", wrapAsync(async (req, res) => {
-    await Society.find().then((data) => { returnData = data });
-    res.send(returnData);
+    const data = await Society.find();
+    res.send(data);
 }));
 
 
@@ -191,5 +192,7 @@ complaintControl.post("/new", validateComplaint, wrapAsync(async (req, res) => {
     console.log("Added");
     res.send("Success!")
 }))
+
+
 
 module.exports = { userControl, societyControl, service, complaintControl };

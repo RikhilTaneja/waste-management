@@ -19,8 +19,9 @@ module.exports.societyValidation = Joi.object({
 })
 
 module.exports.complaintValidation = Joi.object({
+    category: Joi.string().required(),
     title: Joi.string().required(),
-    body: Joi.string().required(),
+    description: Joi.string().required(),
     address: Joi.string().required(),
     resolved: Joi.boolean(),
     image: Joi.string().required(),
