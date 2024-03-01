@@ -16,7 +16,7 @@ const complaintSchema = new mongoose.Schema({
     },
     resolved:{
         type: Boolean,
-        default: False
+        default: false
     },
     image: {
         type: String

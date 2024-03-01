@@ -9,26 +9,33 @@ const ExpressError = require("../utils/ExpressError");
 const userControl = express.Router();
 const societyControl = express.Router();
 const complaintControl = express.Router();
+const paymentRouter = express.Router()
 const service = express.Router();
+const razorpay = require("razorpay")
+const crypto = require("crypto")
 var jwt = require("jsonwebtoken");
 const { userValidation, societyValidation, complaintValidation } = require("../utils/validation");
 const Complaint = require("../models/complaints");
 
+
 // making incoming data as in json format
 app.use(express.json());
+require("dotenv").config();
 userControl.use(express.json());
 service.use(express.json());
 societyControl.use(express.json());
 complaintControl.use(express.json());
 
+
 // for parsing more entities so that image can be covertede to Base64 format
 var bodyParser = require('body-parser');
+const Payment = require("../models/razorpay");
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 
 
 // functions for verfications
-
+// console.log(process.env.MONGO_LINK)
 const validateUser = (req, res, next) => {
     let { error } = userValidation.validate(req.body);
     if (error) {
@@ -60,7 +67,7 @@ const jwtVerify = (req, res, next) => {
     try {
         let { authorization } = req.headers;
         let result = jwt.verify(authorization, process.env.JWT_PASS);
-        console.log(result.username);
+        // console.log(result.username);
         next();
     } catch (err) {
         throw new ExpressError(
@@ -192,4 +199,24 @@ complaintControl.post("/new", validateComplaint, wrapAsync(async (req, res) => {
     res.send("Success!")
 }))
 
-module.exports = { userControl, societyControl, service };
+const instance = new razorpay({
+    key_id:process.env.KEY_ID,
+    key_secret:process.env.KEY_SECRET
+})
+
+paymentRouter.post("/checkout",wrapAsync(async (req,res)=>{
+    // console.log(req.body)
+    const options = {
+        amount:Number(req.body.amount*100),
+        currency: "INR"
+    }
+    const order = await instance.orders.create(options)
+    // console.log(order)
+    res.status(200).json({success:true,order})
+}))
+
+paymentRouter.get("/getkey",(req,res)=>{
+    res.json({key:process.env.KEY_ID})
+})
+
+module.exports = { userControl, societyControl, service,paymentRouter };

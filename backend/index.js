@@ -2,7 +2,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const {service, userControl, societyControl} = require("./routes/routes");
+const {service, userControl, societyControl, paymentRouter} = require("./routes/routes");
 const cors = require("cors");
 
 // requiring ENV folder (environment variables)
@@ -13,18 +13,19 @@ app.use(express.json())
 app.use(cors())
 
 main()
-  .then(() => {
-    console.log("Connection Successful!");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+.then(() => {
+  console.log("Connection Successful!");
+})
+.catch((err) => {
+  console.log(err);
+});
 
 async function main() {
   await mongoose.connect(process.env.MONGO_LINK);
 }
 
 app.use(cors());
+app.use(express.urlencoded({extended:true}))
 
 app.get("/", (req, res) => {
   res.send("HOME PAGE");
@@ -33,6 +34,7 @@ app.get("/", (req, res) => {
 app.use("/services", service);
 app.use("/user", userControl);
 app.use("/society", societyControl);
+app.use("/pay",paymentRouter)
 
 app.listen(8080, () => {
   console.log("Listening on Port 8080");
