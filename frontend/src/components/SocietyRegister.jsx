@@ -5,6 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { FormControl, FormLabel, Input, Text, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useContext } from "react";
+import { AppContext } from "./Context";
 
 export default function SocietyRegister() {
   const navigate = useNavigate();
@@ -18,26 +20,25 @@ export default function SocietyRegister() {
   // console.log(watch())
   const FormSubmitHandler = (formData) => {
     console.log(formData);
-    const id = toast.loading("Signing Up...");
+    const id = toast.loading("Adding society..");
     setTimeout(() => {
       axios
-        .post("", formData)
+        .post("http://localhost:8080/society/new", formData)
         .then((result) => {
           console.log("ADDED");
           toast.update(id, {
-            render: "Signed Up",
+            render: "Society Registered!",
             type: "success",
             isLoading: false,
           });
-          setLogin(loginCheck());
           setTimeout(() => {
-            navigate("");
+            navigate("/");
           }, 1200);
         })
         .catch((err) => {
           console.log(err);
           toast.update(id, {
-            render: "Username exists",
+            render: "Some error occurred!",
             type: "error",
             isLoading: false,
           });

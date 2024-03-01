@@ -259,6 +259,11 @@ a6[data-active] {
   padding: 1vmax;
 }
 
+.title-nav {
+  color: white;
+  font-size: 2vmax;
+}
+
 #arrow {
   cursor: pointer;
 }

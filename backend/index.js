@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 // Import routes
-const { service, userControl, societyControl, complaintControl } = require('./routes/routes');
+const { service, userControl, societyControl, complaintControl, paymentRouter } = require('./routes/routes');
 
 const app = express();
 
@@ -39,6 +39,7 @@ app.use('/services', service);
 app.use('/user', userControl);
 app.use('/society', societyControl);
 app.use('/complaint', complaintControl);
+app.use('/pay',paymentRouter)
 
 // Define a basic route
 app.get('/', (req, res) => {

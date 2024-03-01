@@ -69,6 +69,19 @@ export default function Login() {
   return (
     <div className="form-parent">
       <ToastContainer />
+      <Link
+        to="/signup"
+        style={{
+          fontSize: "2vmin",
+          color: "green",
+          textDecoration: "underline",
+          textAlign: "center",
+          paddingTop: "1vmax",
+        }}
+      >
+        Not a member? Signup here...
+      </Link>
+      <br />
       <form className="form" onSubmit={handleSubmit(FormSubmitHandler)}>
         <Text as="b" fontSize="2.3vmax">
           Welcome Back..!
@@ -115,18 +128,7 @@ export default function Login() {
           Submit
         </Button>
       </form>
-      <Link
-        to="/signup"
-        style={{
-          fontSize: "2vmin",
-          color: "lightblue",
-          textDecoration: "underline",
-          textAlign: "center",
-          paddingTop: "1vmax",
-        }}
-      >
-        Not a member? Signup here...
-      </Link>
+      
     </div>
   );
 }

@@ -57,7 +57,7 @@ export default function Signup() {
           });
 
           setTimeout(() => {
-            // navigate("/");
+            navigate("/");
           }, 1200);
         })
         .catch((err) => {
@@ -74,6 +74,19 @@ export default function Signup() {
   return (
     <div className="form-parent">
       <ToastContainer />
+      <Link
+        to="/login"
+        style={{
+          fontSize: "2vmin",
+          color: "green",
+          textDecoration: "underline",
+          textAlign: "center",
+          paddingTop: "1vmax",
+        }}
+      >
+        Already a user?Login here...
+      </Link>
+      <br />
       <form className="form1" onSubmit={handleSubmit(FormSubmitHandler)}>
         <Text as="b" fontSize="2.3vmax">
           Sign Up
@@ -200,18 +213,7 @@ export default function Signup() {
           Submit
         </Button>
       </form>
-      <Link
-        to="/login"
-        style={{
-          fontSize: "2vmin",
-          color: "lightblue",
-          textDecoration: "underline",
-          textAlign: "center",
-          paddingTop: "1vmax",
-        }}
-      >
-        Already a user?Login here...
-      </Link>
+      
     </div>
   );
 }

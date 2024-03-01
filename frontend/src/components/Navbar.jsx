@@ -105,7 +105,9 @@ export default function Navbar() {
       <nav className="flex">
         <div className="nav-parent-2 flex">
           <div className="nav-logo">
-            <div>Title</div>
+            <Link to="/">
+            <div className="title-nav">WasteX</div>
+            </Link>
           </div>
           <div className="nav-options flex">
             {isMobile ? (

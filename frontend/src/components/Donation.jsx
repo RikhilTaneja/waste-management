@@ -45,7 +45,6 @@ export default function Donation() {
   }, []);
   const FormSubmitHandler = (formData) => {
     console.log(formData);
-
     axios
       .post("http://localhost:8080/pay/checkout", formData)
       .then((res) => {
@@ -85,10 +84,10 @@ export default function Donation() {
       <ToastContainer />
       <form className="form" onSubmit={handleSubmit(FormSubmitHandler)}>
         <Text as="b" fontSize="2.3vmax">
-          Sign Up
+          Donate Now!
         </Text>
         <Text as="i" fontSize="1vmax">
-          Enter the following details!
+          Enter the amount you would like to donate!
         </Text>
         <FormControl>
           <FormLabel fontSize="1.2vmax" as="i" fontWeight="550">

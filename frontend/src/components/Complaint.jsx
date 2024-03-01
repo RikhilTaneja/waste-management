@@ -13,6 +13,8 @@ import { SimpleGrid } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Complaint() {
   const [comp, setComp] = useState({});
@@ -93,13 +95,26 @@ export default function Complaint() {
   };
 
   let finalSubmit = () => {
+    const id = toast.loading("Signing Up...");
     axios
       .post("http://localhost:8080/complaint/new", comp)
       .then(() => {
-        console.log("ok");
+        toast.update(id, {
+          render: "Complaint Registered!",
+          type: "success",
+          isLoading: false,
+        });
+        setTimeout(()=>{
+          navigate("/");
+        }, 1500)
       })
       .catch((err) => {
         console.log(err);
+        toast.update(id, {
+          render: "An Error Occured :(",
+          type: "error",
+          isLoading: false,
+        });
       });
   };
 
@@ -222,6 +237,7 @@ export default function Complaint() {
         return (
           <>
             <div className="tag-line">
+    <ToastContainer />
               <div className="complaint-box">
                 <div className="tag-heading">Upload the image!</div>
                 <div className="tag-subHeading">
