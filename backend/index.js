@@ -4,49 +4,41 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 // Import routes
-const { service, userControl, societyControl, complaintControl,paymentRouter } = require('./routes/routes');
+const { service, userControl, societyControl, complaintControl } = require('./routes/routes');
 
 const app = express();
-const cors = require("cors");
 
-var bodyParser = require('body-parser');
-app.use(bodyParser.json({limit: "50mb"}));
-app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
+// Configure body parser for larger requests
+const bodyParser = require('body-parser');
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));
 
 // Use CORS middleware
 app.use(cors());
 
-
 // Make incoming data in JSON format
 app.use(express.json());
 
-// Configure body parser for larger requests
-
-
 // Connect to MongoDB
 main()
-
-.then(() => {
-  console.log("Connection Successful!");
-})
-.catch((err) => {
-  console.log(err);
-});
+  .then(() => {
+    console.log("Connection Successful!");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 async function main() {
   await mongoose.connect(process.env.MONGO_LINK);
 }
 
-
-app.use(cors());
-app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({ extended: true }));
 
 // Define routes
 app.use('/services', service);
 app.use('/user', userControl);
 app.use('/society', societyControl);
 app.use('/complaint', complaintControl);
-
 
 // Define a basic route
 app.get('/', (req, res) => {
