@@ -54,19 +54,6 @@ export default function Complaint() {
     }));
   }
 
-  // console.log(watch())
-  //   const FormSubmitHandler = (data) => {
-  //     axios
-  //       .post("https://technology-fails.onrender.com/posts", data)
-  //       .then(() => {
-  //         console.log("ADDED");
-  //         navigate("/listings");
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   };
-
   function convertToBase64(file) {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
@@ -97,7 +84,7 @@ export default function Complaint() {
   let finalSubmit = () => {
     const id = toast.loading("Signing Up...");
     axios
-      .post("http://localhost:8080/complaint/new", comp)
+      .post("https://waste-management-theta.vercel.app/complaint/new", comp)
       .then(() => {
         toast.update(id, {
           render: "Complaint Registered!",

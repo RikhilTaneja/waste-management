@@ -12,6 +12,7 @@ import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { TbMoneybag } from "react-icons/tb";
 import { BiSolidUserVoice } from "react-icons/bi";
 import { MdOutlineAutoGraph } from "react-icons/md";
+import { FaClipboardQuestion } from "react-icons/fa6";
 import { RiTeamFill } from "react-icons/ri";
 import { TbLogin2 } from "react-icons/tb";
 import { Link, useNavigate } from "react-router-dom";
@@ -138,6 +139,12 @@ export default function Navbar() {
                     </MenuItem>
                   </Link>
 
+                  <Link to="/faq">
+                    <MenuItem icon={<FaClipboardQuestion />}>
+                      FAQ
+                    </MenuItem>
+                  </Link>
+
                   <Link to="/about">
                     <MenuItem icon={<RiTeamFill />}>About Us</MenuItem>
                   </Link>
@@ -163,6 +170,7 @@ export default function Navbar() {
                   >
                     Services
                   </MenuButton>
+                  
                   <MenuList>
                     <Link to="/complaint">
                       <MenuItem minH="40px">
@@ -187,6 +195,14 @@ export default function Navbar() {
                         <span>Incentives</span>
                       </MenuItem>
                     </Link>
+
+                    <Link to="/complaints">
+                      <MenuItem minH="40px">
+                        <BiSolidUserVoice />
+                        &nbsp;
+                        <span>Existing Complaints</span>
+                      </MenuItem>
+                      </Link>
                   </MenuList>
                 </Menu>
 
@@ -207,6 +223,27 @@ export default function Navbar() {
                       }}
                     >
                       About Us
+                    </MenuButton>
+                  </Link>
+                </Menu>
+
+                <Menu>
+                  <Link to="/faq">
+                    <MenuButton
+                      as={Button}
+                      leftIcon={<FaClipboardQuestion />}
+                      sx={{
+                        backgroundColor: "green",
+                        color: "white",
+                        ":hover": {
+                          backgroundColor: "darkgreen",
+                        },
+                        ":active": {
+                          backgroundColor: "green",
+                        },
+                      }}
+                    >
+                      FAQ
                     </MenuButton>
                   </Link>
                 </Menu>
