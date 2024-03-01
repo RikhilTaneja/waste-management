@@ -10,32 +10,38 @@ import { useNavigate } from "react-router-dom";
 export default function Card({ data }) {
   const navigate = useNavigate();
   let [like, setLike] = useState(false);
-  console.log("data",data);
+  console.log("data", data);
   const cardClick = () => {
     navigate(`/incentive/society/${data._id}`);
   };
   return (
-    <Box bg="aliceblue" padding="2vmin" borderRadius="10px">
+    <Box
+      border="green 3px solid"
+      padding="2vmin"
+      borderRadius="10px"
+      width="20vmax"
+      height="20vmax"
+    >
       <ToastContainer />
       <div className="card" onClick={cardClick}>
         {/* <div className="card-img" onClick={cardClick}>
           <img src={data.image} alt="twitter bird caged" />
         </div> */}
-        <div className="card-title">
-          <Text textAlign="center" fontWeight="extrabold" fontSize="1.2vmax">
-            {data.name}
-          </Text>
-        </div>
-        <div className="card-author">
-          <Text as="i" fontSize="1vmax">
-            ~{data.location}
-          </Text>
-        </div>
-        <div className="card-tagline">
+        <div className="card-tagline" fontSize="2vmax">
           {/* <Text as="b" fontSize="1.2vmax">
                       How to destroy a Social Media App..?
                     </Text> */}
           Residents:- {data.residents}
+        </div>
+        <div className="card-title">
+          <Text textAlign="center" fontWeight="extrabold" fontSize="2.3vmax">
+            {data.name}
+          </Text>
+        </div>
+        <div className="card-author">
+          <Text as="i" fontSize="1.1vmax">
+            ~{data.location}
+          </Text>
         </div>
         {/* <div className="card-social">
           <div className="likes">
