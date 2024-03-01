@@ -4,10 +4,9 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 // Import routes
-const { service, userControl, societyControl, complaintControl } = require('./routes/routes');
+const { service, userControl, societyControl, complaintControl,paymentRouter } = require('./routes/routes');
 
 const app = express();
-const {service, userControl, societyControl, paymentRouter} = require("./routes/routes");
 const cors = require("cors");
 
 var bodyParser = require('body-parser');
