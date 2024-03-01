@@ -6,6 +6,7 @@
   box-sizing: border-box;
   transition: 0.5s;
 }
+
 .container {
   display: flex;
   flex-direction: column;
@@ -14,6 +15,7 @@
   font-family: Urbanist;
   background-color: #fefed4;
 }
+
 .form-parent {
   flex: 1;
   padding: 5vmin 10vmin;
@@ -24,6 +26,7 @@
   /* background-color: aliceblue; */
   /* color: rgb(198, 232, 255); */
 }
+
 .form {
   display: flex;
   flex-direction: column;
@@ -34,11 +37,13 @@
   background-color: #fefed4;
   gap: 2vmin;
 }
+
 .err {
   color: red;
   font-size: 1.5vmin;
   margin-top: 0.5qvmin;
 }
+
 .flex {
   display: flex;
   justify-content: center;
@@ -86,7 +91,8 @@ nav {
 }
 
 a6[data-active] {
-  background: green; /* Change to the desired shade of green */
+  background: green;
+  /* Change to the desired shade of green */
 }
 
 .nav-div-2 {
@@ -103,17 +109,21 @@ a6[data-active] {
   font-size: 2.5vmax;
   font-weight: 700;
 }
+
 .tag-subHeading {
   font-size: 1.2vmax;
 }
+
 .category-btn {
   font-size: 1.2vmax;
 }
+
 .tag-line {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .complaint-box {
   line-height: 3vmax;
   display: flex;
@@ -129,21 +139,25 @@ a6[data-active] {
   flex-direction: column;
   gap: 3vmax;
 }
+
 .next-button {
   display: flex;
   justify-content: flex-end;
 }
+
 .button-div {
   display: flex;
   flex-wrap: wrap;
   gap: 2vmax;
 }
+
 .progress-div {
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50px;
 }
+
 .progress-bar {
   /* border: 2px blue solid; */
   background-color: aliceblue;
@@ -151,10 +165,12 @@ a6[data-active] {
   border-radius: 50px;
   width: 50vw;
 }
+
 .progress {
   height: 100%;
   background-color: rgba(7, 99, 7, 0.63);
 }
+
 .form-parent {
   flex: 1;
   padding: 5vmin 10vmin;
@@ -165,10 +181,12 @@ a6[data-active] {
   /* background-color: aliceblue; */
   /* color: rgb(198, 232, 255); */
 }
+
 .buttons {
   display: flex;
   gap: 1vmax;
 }
+
 .form {
   display: flex;
   flex-direction: column;
@@ -180,6 +198,7 @@ a6[data-active] {
   background-color: #fefed4;
   gap: 2vmin;
 }
+
 .form1 {
   display: flex;
   flex-direction: column;
@@ -191,6 +210,7 @@ a6[data-active] {
   background-color: #fefed4;
   gap: 2vmin;
 }
+
 .err {
   color: red;
   font-size: 1.5vmin;
@@ -201,21 +221,50 @@ a6[data-active] {
 
 .edu-parent {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  /* Center the child horizontally */
+  align-items: center;
+  /* Center the child vertically */
   padding: 4vmax;
+  font-weight: 500;
 }
+
 .edu-div {
-  border: 2px red solid;
+  width: 70vw;
+  flex-direction: column;
 }
+
+.edu-text {
+  font-size: 1.5vmax;
+  margin-right: 2vw;
+}
+
 .content {
   display: flex;
   padding: 1.5vmax;
 }
+
+#edu-img {
+  width: 100vw;
+  height: 40vh;
+  border-radius: 2vw;
+}
+
 .nav-buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  width: 50%;
   align-items: center;
   padding: 1vmax;
 }
+
+#arrow {
+  cursor: pointer;
+}
+
+
+
 /* Home */
 
 .home-parent {
@@ -225,14 +274,17 @@ a6[data-active] {
   color: green;
   justify-content: space-between;
 }
+
 .right-img {
   width: 50vmax;
 }
+
 .right-img-div {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .moto-div {
   padding: 1vmax;
   display: flex;
@@ -240,16 +292,19 @@ a6[data-active] {
   gap: 1.5vmax;
   padding-top: 5vmax;
 }
+
 .moto {
   font-size: 4.5vmax;
   font-weight: 600;
 }
+
 .sub-moto {
   font-size: 1.4vmax;
   font-weight: 500;
   /* max-width: 25vmax; */
   color: rgb(77, 125, 5);
 }
+
 a {
   color: rgb(153, 255, 0);
   cursor: pointer;
@@ -340,12 +395,20 @@ a {
     flex-direction: column-reverse;
     justify-content: space-evenly;
   }
+
   .moto-div {
     align-items: center;
   }
+
   .moto {
     font-size: 4.3vmax;
     text-align: center;
+  }
+
+  .content {
+  flex-direction: column;
+  text-align: center;
+  gap: 1vh;
   }
   .category-btn {
     font-size: 50vmax;
@@ -362,6 +425,7 @@ a {
   nav {
     width: 90vw;
   }
+
   #img-logo {
     width: 8vmax;
   }

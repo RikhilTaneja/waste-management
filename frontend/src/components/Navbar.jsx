@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Button,
   Image,
@@ -14,9 +14,80 @@ import { BiSolidUserVoice } from "react-icons/bi";
 import { MdOutlineAutoGraph } from "react-icons/md";
 import { RiTeamFill } from "react-icons/ri";
 import { TbLogin2 } from "react-icons/tb";
+import { Link, useNavigate } from "react-router-dom";
+import { AppContext } from "./Context";
+import { deleteCookie } from "../utils/cookie";
+import { loginCheck } from "../utils/loginCheck";
 
 export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
+  const { login, setLogin } = useContext(AppContext);
+  const navigate = useNavigate();
+  const logout = ()=>{
+    deleteCookie("username")
+    deleteCookie("auth-token")
+    setLogin(loginCheck())
+    window.reload()
+  }
+  const loginBtn = () => {
+    if (login) {
+      return (
+          <MenuItem onClick={logout} icon={<TbLogin2 />}>Logout</MenuItem>
+      );
+    }else{
+      return(
+        <Link to="/signup">
+          <MenuItem icon={<TbLogin2 />}>Login / Signup</MenuItem>
+        </Link>
+      )
+    }
+  };
+
+  const loginBtn2 = () => {
+    if (login) {
+      return (
+        <MenuButton
+        onClick={logout}
+          as={Button}
+          leftIcon={<TbLogin2 />}
+          sx={{
+            backgroundColor: "green",
+            color: "white",
+            ":hover": {
+              backgroundColor: "green",
+            },
+            ":active": {
+              backgroundColor: "green",
+            },
+          }}
+        >
+          Logout
+        </MenuButton>
+      );
+    }else{
+      return(
+        <Link to="/signup">
+                    <MenuButton
+                      as={Button}
+                      leftIcon={<TbLogin2 />}
+                      sx={{
+                        backgroundColor: "green",
+                        color: "white",
+                        ":hover": {
+                          backgroundColor: "green",
+                        },
+                        ":active": {
+                          backgroundColor: "green",
+                        },
+                      }}
+                    >
+                      Login / Signup
+                    </MenuButton>
+                  </Link>
+      )
+    }
+  };
+
 
   useEffect(() => {
     function handleResize() {
@@ -49,11 +120,26 @@ export default function Navbar() {
                   sx={{ borderColor: "transparent" }} // Set border color to transparent
                 />
                 <MenuList>
-                  <MenuItem icon={<BiSolidUserVoice />}>Raise a Voice</MenuItem>
-                  <MenuItem icon={<TbMoneybag />}>Donations</MenuItem>
-                  <MenuItem icon={<MdOutlineAutoGraph />}>Incentives</MenuItem>
-                  <MenuItem icon={<RiTeamFill />}>About Us</MenuItem>
-                  <MenuItem icon={<TbLogin2 />}>Login / Signup</MenuItem>
+                  <Link to="/complaint">
+                    <MenuItem icon={<BiSolidUserVoice />}>
+                      Raise a Voice
+                    </MenuItem>
+                  </Link>
+
+                  <Link to="/donation">
+                    <MenuItem icon={<TbMoneybag />}>Donations</MenuItem>
+                  </Link>
+
+                  <Link to="/incentive">
+                    <MenuItem icon={<MdOutlineAutoGraph />}>
+                      Incentives
+                    </MenuItem>
+                  </Link>
+
+                  <Link to="/about">
+                    <MenuItem icon={<RiTeamFill />}>About Us</MenuItem>
+                  </Link>
+                  {loginBtn()}
                 </MenuList>
               </Menu>
             ) : (
@@ -76,60 +162,55 @@ export default function Navbar() {
                     Services
                   </MenuButton>
                   <MenuList>
-                    <MenuItem minH="40px">
-                      <BiSolidUserVoice />
-                      &nbsp;
-                      <span>Raise a Voice</span>
-                    </MenuItem>
-                    <MenuItem minH="40px">
-                      <TbMoneybag />
-                      &nbsp;
-                      <span>Donations</span>
-                    </MenuItem>
-                    <MenuItem minH="40px">
-                      <MdOutlineAutoGraph />
-                      &nbsp;
-                      <span>Incentives</span>
-                    </MenuItem>
+                    <Link to="/complaint">
+                      <MenuItem minH="40px">
+                        <BiSolidUserVoice />
+                        &nbsp;
+                        <span>Raise a Voice</span>
+                      </MenuItem>
+                    </Link>
+
+                    <Link to="/donation">
+                      <MenuItem minH="40px">
+                        <TbMoneybag />
+                        &nbsp;
+                        <span>Donations</span>
+                      </MenuItem>
+                    </Link>
+
+                    <Link to="/incentive">
+                      <MenuItem minH="40px">
+                        <MdOutlineAutoGraph />
+                        &nbsp;
+                        <span>Incentives</span>
+                      </MenuItem>
+                    </Link>
                   </MenuList>
                 </Menu>
 
                 <Menu>
-                  <MenuButton
-                    as={Button}
-                    leftIcon={<RiTeamFill />}
-                    sx={{
-                      backgroundColor: "green",
-                      color: "white",
-                      ":hover": {
-                        backgroundColor: "darkgreen",
-                      },
-                      ":active": {
+                  <Link to="/about">
+                    <MenuButton
+                      as={Button}
+                      leftIcon={<RiTeamFill />}
+                      sx={{
                         backgroundColor: "green",
-                      },
-                    }}
-                  >
-                    About Us
-                  </MenuButton>
+                        color: "white",
+                        ":hover": {
+                          backgroundColor: "darkgreen",
+                        },
+                        ":active": {
+                          backgroundColor: "green",
+                        },
+                      }}
+                    >
+                      About Us
+                    </MenuButton>
+                  </Link>
                 </Menu>
 
                 <Menu>
-                  <MenuButton
-                    as={Button}
-                    leftIcon={<TbLogin2 />}
-                    sx={{
-                      backgroundColor: "green",
-                      color: "white",
-                      ":hover": {
-                        backgroundColor: "green",
-                      },
-                      ":active": {
-                        backgroundColor: "green",
-                      },
-                    }}
-                  >
-                    Login / Signup
-                  </MenuButton>
+                  {loginBtn2()}
                 </Menu>
               </>
             )}
