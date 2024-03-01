@@ -7,8 +7,6 @@ require('dotenv').config();
 const { service, userControl, societyControl, complaintControl } = require('./routes/routes');
 
 const app = express();
-
-const mongoose = require("mongoose");
 const {service, userControl, societyControl, paymentRouter} = require("./routes/routes");
 const cors = require("cors");
 
