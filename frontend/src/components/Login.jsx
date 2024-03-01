@@ -10,9 +10,6 @@ import { setCookie } from "../utils/cookie";
 import { AppContext } from "./Context";
 import { loginCheck } from "../utils/loginCheck";
 
-
-
-
 export default function Login() {
   const navigate = useNavigate();
   const {
@@ -23,7 +20,7 @@ export default function Login() {
     formState: { errors },
   } = useForm();
   // console.log(watch())
-  const {login,setLogin} = useContext(AppContext)
+  const { login, setLogin } = useContext(AppContext);
   const FormSubmitHandler = (formData) => {
     // console.log(formData);
     const id = toast.loading("Logging In...");
@@ -32,9 +29,9 @@ export default function Login() {
         .post("https://waste-management-theta.vercel.app/user/login", formData)
         .then((result) => {
           // console.log("ADDED");
-          setCookie("username",formData.username,365)
-          setCookie("auth-token",result.data,365)
-          setLogin(loginCheck())
+          setCookie("username", formData.username, 365);
+          setCookie("auth-token", result.data, 365);
+          setLogin(loginCheck());
           toast.update(id, {
             render: "Logged In!",
             type: "success",
@@ -46,24 +43,24 @@ export default function Login() {
         })
         .catch((err) => {
           console.log(err);
-          if(err.response.status==404){
-              toast.update(id, {
-                render: "Username not found",
-                type: "error",
-                isLoading: false,
-              });    
-          }else if(err.response.status==401){
+          if (err.response.status == 404) {
             toast.update(id, {
-                render: "Incorrect Password",
-                type: "error",
-                isLoading: false,
-              });
-          }else{
+              render: "Username not found",
+              type: "error",
+              isLoading: false,
+            });
+          } else if (err.response.status == 401) {
             toast.update(id, {
-                render: "Server Error. Contact admin",
-                type: "error",
-                isLoading: false,
-              });
+              render: "Incorrect Password",
+              type: "error",
+              isLoading: false,
+            });
+          } else {
+            toast.update(id, {
+              render: "Server Error. Contact admin",
+              type: "error",
+              isLoading: false,
+            });
           }
         });
     }, 1000);
@@ -114,11 +111,22 @@ export default function Login() {
           />
           <p className="err">{errors.password?.message}</p>
         </FormControl>
-        <Button type="submit" colorScheme="red"  >
+        <Button type="submit" colorScheme="green">
           Submit
         </Button>
       </form>
-      <Link to="/signup" style={{fontSize:"2vmin",color:"lightblue",textDecoration:"underline",textAlign:"center",paddingTop:"1vmax"}}>Not a member? Signup here...</Link>
+      <Link
+        to="/signup"
+        style={{
+          fontSize: "2vmin",
+          color: "lightblue",
+          textDecoration: "underline",
+          textAlign: "center",
+          paddingTop: "1vmax",
+        }}
+      >
+        Not a member? Signup here...
+      </Link>
     </div>
   );
 }
