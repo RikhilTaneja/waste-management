@@ -1,12 +1,15 @@
 const mongoose = require("mongoose");
 
 const complaintSchema = new mongoose.Schema({
+    category:{
+        type:String,
+        required:true
+    },
     title:{
         type:String,
         required:true,
-        unique: true
     },
-    body:{
+    description:{
         type:String,
         required:true
     },

@@ -32,7 +32,8 @@ var bodyParser = require('body-parser');
 const Payment = require("../models/razorpay");
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
-
+complaintControl.use(bodyParser.json({limit: "50mb"}));
+complaintControl.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 
 // functions for verfications
 // console.log(process.env.MONGO_LINK)
@@ -159,8 +160,8 @@ societyControl.post("/new", validateSociety, wrapAsync(async (req, res) => {
 // route for getting all society
 
 societyControl.get("/", wrapAsync(async (req, res) => {
-    await Society.find().then((data) => { returnData = data });
-    res.send(returnData);
+    const data = await Society.find();
+    res.send(data);
 }));
 
 
@@ -199,6 +200,7 @@ complaintControl.post("/new", validateComplaint, wrapAsync(async (req, res) => {
     res.send("Success!")
 }))
 
+
 const instance = new razorpay({
     key_id:process.env.KEY_ID,
     key_secret:process.env.KEY_SECRET
@@ -219,4 +221,5 @@ paymentRouter.get("/getkey",(req,res)=>{
     res.json({key:process.env.KEY_ID})
 })
 
-module.exports = { userControl, societyControl, service,paymentRouter };
+module.exports = { userControl, societyControl, service,paymentRouter,complaintControl };
+

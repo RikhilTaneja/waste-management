@@ -12,15 +12,23 @@ import React, { useState } from "react";
 import { SimpleGrid } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Complaint() {
+  const [comp, setComp] = useState({});
   const [count, setCount] = useState(1);
-  const [length, setLength] = useState(10);
+  const [length, setLength] = useState(1);
   const [image, setImage] = useState("");
+  const categories = ["Industrial", "Event", "Societal Waste", "Others"];
+
+  function handleButtonClick(value) {
+    setComp({ category: value });
+    nextDetail();
+  }
 
   function nextDetail() {
     setCount(count + 1);
-    setLength((count + 1) * length);
+    setLength((count + 1) * 33.3);
   }
   function lastDetail() {
     setCount(count - 1);
@@ -33,6 +41,15 @@ export default function Complaint() {
     reset,
     formState: { errors },
   } = useForm();
+
+function handleSubmitForm(data) {
+  setComp((prevData) => ({
+    ...prevData,
+    title: data.title,
+    description: data.description,
+    address: data.address,
+  }));
+}
 
   // console.log(watch())
   //   const FormSubmitHandler = (data) => {
@@ -49,35 +66,35 @@ export default function Complaint() {
 
   function convertToBase64(file) {
     return new Promise((resolve, reject) => {
-      const fileReader = new FileReader()
-      fileReader.readAsDataURL(file)
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
       fileReader.onload = () => {
-        resolve(fileReader.result)
-      }
+        resolve(fileReader.result);
+      };
       fileReader.onerror = (error) => {
-        reject(error)
-      }
+        reject(error);
+      };
     });
   }
 
   let base64;
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
-    base64 = await convertToBase64(file)
-  }
+    base64 = await convertToBase64(file);
+  };
 
-  const imageFileUpload = () => {
-    setImage({...image, myFile:base64})
-    setImage((prevImage)=>{
-      return {
-        ...prevImage,
-        myFile: base64
-      };
-    })
-    console.log(image);
-  }
-  const lgog = () => {
-    console.log(image);
+  const imageFileUpload = async () => {
+    setImage({ ...image, myFile: base64 })
+    setComp((prevData) => ({
+      ...prevData,
+      image: base64,
+    }));
+  };
+
+  let finalSubmit = () => {
+    axios.post("http://localhost:8080/complaint/new", comp)
+    .then(()=>{console.log("ok");})
+    .catch((err)=>{console.log(err);})
   }
 
   function complaint() {
@@ -92,42 +109,19 @@ export default function Complaint() {
               </div>
               <div className="catrgory-div">
                 <SimpleGrid columns={[1, 1, 1, 4]} spacing={10}>
-                  <Button
-                    background="none"
-                    border="3px black solid"
-                    height="6vmax"
-                    width="100%"
-                    fontSize="1.2vmax"
-                  >
-                    category1
-                  </Button>
-                  <Button
-                    background="none"
-                    border="3px black solid"
-                    height="6vmax"
-                    width="100%"
-                    fontSize="1.2vmax"
-                  >
-                    category2
-                  </Button>
-                  <Button
-                    background="none"
-                    border="3px black solid"
-                    height="6vmax"
-                    width="100%"
-                    fontSize="1.2vmax"
-                  >
-                    category4
-                  </Button>
-                  <Button
-                    background="none"
-                    border="3px black solid"
-                    height="6vmax"
-                    width="100%"
-                    fontSize="1.2vmax"
-                  >
-                    others
-                  </Button>
+                  {categories.map((category, index) => (
+                    <Button
+                      key={index}
+                      background="none"
+                      border="3px black solid"
+                      height="6vmax"
+                      width="100%"
+                      fontSize="1.2vmax"
+                      onClick={() => handleButtonClick(category)}
+                    >
+                      {category}
+                    </Button>
+                  ))}
                 </SimpleGrid>
               </div>
               <div className="next-button">
@@ -149,7 +143,7 @@ export default function Complaint() {
                   It will help us work on it ASAP..
                 </div>
                 <div className="form-parent">
-                  <form className="form" onSubmit={handleSubmit}>
+                <form className="form" onSubmit={handleSubmit(handleSubmitForm)}>
                     <FormControl>
                       <FormLabel fontSize="1.2vmax" as="i" fontWeight="550">
                         Title
@@ -184,12 +178,13 @@ export default function Complaint() {
                       <Input
                         type="text"
                         borderColor="black"
-                        {...register("a ddress", {
+                        {...register("address", {
                           required: "Please provide the required Address",
                         })}
                       />
                       <p className="err">{errors.address?.message}</p>
                     </FormControl>
+                    <Button type="submit">Submit</Button>
                   </form>
                 </div>
                 <div className="next-button">
@@ -199,6 +194,7 @@ export default function Complaint() {
                     <Button colorScheme="red" onClick={nextDetail}>
                       Next
                     </Button>
+                    
                   </div>
                 </div>
               </div>
@@ -207,7 +203,7 @@ export default function Complaint() {
         );
         break;
       case 3:
-        return(
+        return (
           <>
             <div className="tag-line">
               <div className="complaint-box">
@@ -217,14 +213,14 @@ export default function Complaint() {
                 </div>
                 <div className="form-parent">
                   <form className="form" onSubmit={handleSubmit}>
-                  <input
-            type="file"
-            label="Image"
-            name="myFile"
-            id="file-upload"
-            accept=".jpeg, .png, .jpg"
-            onChange={(e)=>handleFileUpload(e)}
-          />
+                    <input
+                      type="file"
+                      label="Image"
+                      name="myFile"
+                      id="file-upload"
+                      accept=".jpeg, .png, .jpg"
+                      onChange={(e) => handleFileUpload(e)}
+                    />
                     <Button onClick={imageFileUpload}>Upload!</Button>
                   </form>
                 </div>
@@ -232,9 +228,10 @@ export default function Complaint() {
                   <div className="buttons">
                     <Button onClick={lastDetail}>Back</Button>
 
-                    <Button colorScheme="red" onClick={nextDetail}>
-                      Next
+                    <Button colorScheme="red" onClick={finalSubmit}>
+                      Submit
                     </Button>
+
                   </div>
                 </div>
               </div>
