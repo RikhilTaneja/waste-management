@@ -1,6 +1,5 @@
 // importing required modules
 const express = require("express");
-const app = express();
 const mongoose = require("mongoose");
 const wrapAsync = require("../utils/wrapAsync");
 const User = require("../models/user");
@@ -9,16 +8,16 @@ const ExpressError = require("../utils/ExpressError");
 const userControl = express.Router();
 const societyControl = express.Router();
 const complaintControl = express.Router();
-const paymentRouter = express.Router()
+const paymentRouter = express.Router();
 const service = express.Router();
-const razorpay = require("razorpay")
-const crypto = require("crypto")
-var jwt = require("jsonwebtoken");
+const razorpay = require("razorpay");
+const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
 const { userValidation, societyValidation, complaintValidation } = require("../utils/validation");
 const Complaint = require("../models/complaints");
 
-
 // making incoming data as in json format
+const app = express();
 app.use(express.json());
 require("dotenv").config();
 userControl.use(express.json());
@@ -26,17 +25,15 @@ service.use(express.json());
 societyControl.use(express.json());
 complaintControl.use(express.json());
 
-
-// for parsing more entities so that image can be covertede to Base64 format
-var bodyParser = require('body-parser');
+// for parsing more entities so that image can be converted to Base64 format
+const bodyParser = require('body-parser');
 const Payment = require("../models/razorpay");
-app.use(bodyParser.json({limit: "50mb"}));
-app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
-complaintControl.use(bodyParser.json({limit: "50mb"}));
-complaintControl.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));
+complaintControl.use(bodyParser.json({ limit: "50mb" }));
+complaintControl.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));
 
-// functions for verfications
-// console.log(process.env.MONGO_LINK)
+// functions for verifications
 const validateUser = (req, res, next) => {
     let { error } = userValidation.validate(req.body);
     if (error) {
@@ -83,14 +80,13 @@ const jwtVerify = (req, res, next) => {
 // ========================================================
 
 // route for signing up
-
 userControl.post("/signup", validateUser, wrapAsync(async (req, res) => {
     let { username, name, password, address, society, contact } = req.body;
-    let checkSociety = await Society.find({name:society});
-    if (checkSociety.length == 0){
+    let checkSociety = await Society.find({ name: society });
+    if (checkSociety.length == 0) {
         throw new ExpressError(404, "Society not Found!")
     }
-    let insertData = new User({username, name, password, address, contact});
+    let insertData = new User({ username, name, password, address, contact });
     insertData.society = checkSociety[0];
     await insertData.save();
     let token = jwt.sign({ username: req.body.username }, process.env.JWT_PASS);
@@ -98,9 +94,7 @@ userControl.post("/signup", validateUser, wrapAsync(async (req, res) => {
     res.send(token);
 }));
 
-
 // route for logging in
-
 userControl.post("/login", wrapAsync(async (req, res) => {
     let { username, password } = req.body;
     let result = await User.find({ "username": username });
@@ -121,9 +115,7 @@ userControl.post("/login", wrapAsync(async (req, res) => {
     }
 }));
 
-
 // route for returning a user
-
 userControl.get("/:id", async (req, res) => {
     let { id } = req.params;
     let result = await User.findById(id);
@@ -133,22 +125,17 @@ userControl.get("/:id", async (req, res) => {
     res.send(result)
 });
 
-
-
 // returns if any error occurs
-
 userControl.use((err, req, res, next) => {
     let { status = 500, message = "Some error occured..!" } = err;
     res.status(status).send(err.message);
 });
-
 
 // ========================================================
 // SOCIETY ROUTES
 // ========================================================
 
 // route for new society
-
 societyControl.post("/new", validateSociety, wrapAsync(async (req, res) => {
     let insertData = new Society(req.body);
     await insertData.save();
@@ -156,17 +143,13 @@ societyControl.post("/new", validateSociety, wrapAsync(async (req, res) => {
     res.send("Success!")
 }));
 
-
 // route for getting all society
-
 societyControl.get("/", wrapAsync(async (req, res) => {
     const data = await Society.find();
     res.send(data);
 }));
 
-
 // route for getting specific society
-
 societyControl.get("/:id", async (req, res) => {
     let { id } = req.params;
     let result = await Society.findById(id);
@@ -176,9 +159,7 @@ societyControl.get("/:id", async (req, res) => {
     res.send(result)
 });
 
-
 // route for editing society
-
 societyControl.put("/edit/:id", validateSociety, wrapAsync(async (req, res) => {
     const { id } = req.params;
     const newData = req.body;
@@ -198,28 +179,24 @@ complaintControl.post("/new", validateComplaint, wrapAsync(async (req, res) => {
     await insertData.save();
     console.log("Added");
     res.send("Success!")
-}))
-
+}));
 
 const instance = new razorpay({
-    key_id:process.env.KEY_ID,
-    key_secret:process.env.KEY_SECRET
-})
+    key_id: process.env.KEY_ID,
+    key_secret: process.env.KEY_SECRET
+});
 
-paymentRouter.post("/checkout",wrapAsync(async (req,res)=>{
-    // console.log(req.body)
+paymentRouter.post("/checkout", wrapAsync(async (req, res) => {
     const options = {
-        amount:Number(req.body.amount*100),
+        amount: Number(req.body.amount * 100),
         currency: "INR"
-    }
-    const order = await instance.orders.create(options)
-    // console.log(order)
-    res.status(200).json({success:true,order})
-}))
+    };
+    const order = await instance.orders.create(options);
+    res.status(200).json({ success: true, order });
+}));
 
-paymentRouter.get("/getkey",(req,res)=>{
-    res.json({key:process.env.KEY_ID})
-})
+paymentRouter.get("/getkey", (req, res) => {
+    res.json({ key: process.env.KEY_ID });
+});
 
-module.exports = { userControl, societyControl, service,paymentRouter,complaintControl };
-
+module.exports = { userControl, societyControl, service, paymentRouter, complaintControl };
