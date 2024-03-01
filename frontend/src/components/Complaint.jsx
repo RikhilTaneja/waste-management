@@ -32,6 +32,7 @@ export default function Complaint() {
   }
   function lastDetail() {
     setCount(count - 1);
+    setLength(1);
   }
   const navigate = useNavigate();
   const {
@@ -42,14 +43,14 @@ export default function Complaint() {
     formState: { errors },
   } = useForm();
 
-function handleSubmitForm(data) {
-  setComp((prevData) => ({
-    ...prevData,
-    title: data.title,
-    description: data.description,
-    address: data.address,
-  }));
-}
+  function handleSubmitForm(data) {
+    setComp((prevData) => ({
+      ...prevData,
+      title: data.title,
+      description: data.description,
+      address: data.address,
+    }));
+  }
 
   // console.log(watch())
   //   const FormSubmitHandler = (data) => {
@@ -84,7 +85,7 @@ function handleSubmitForm(data) {
   };
 
   const imageFileUpload = async () => {
-    setImage({ ...image, myFile: base64 })
+    setImage({ ...image, myFile: base64 });
     setComp((prevData) => ({
       ...prevData,
       image: base64,
@@ -92,10 +93,15 @@ function handleSubmitForm(data) {
   };
 
   let finalSubmit = () => {
-    axios.post("http://localhost:8080/complaint/new", comp)
-    .then(()=>{console.log("ok");})
-    .catch((err)=>{console.log(err);})
-  }
+    axios
+      .post("http://localhost:8080/complaint/new", comp)
+      .then(() => {
+        console.log("ok");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   function complaint() {
     switch (count) {
@@ -112,11 +118,11 @@ function handleSubmitForm(data) {
                   {categories.map((category, index) => (
                     <Button
                       key={index}
+                      className="category-btn"
                       background="none"
-                      border="3px black solid"
+                      border="3px green solid"
                       height="6vmax"
                       width="100%"
-                      fontSize="1.2vmax"
                       onClick={() => handleButtonClick(category)}
                     >
                       {category}
@@ -142,8 +148,11 @@ function handleSubmitForm(data) {
                 <div className="tag-subHeading">
                   It will help us work on it ASAP..
                 </div>
-                <div className="form-parent">
-                <form className="form" onSubmit={handleSubmit(handleSubmitForm)}>
+                <div className="form-paren">
+                  <form
+                    className="form"
+                    onSubmit={handleSubmit(handleSubmitForm)}
+                  >
                     <FormControl>
                       <FormLabel fontSize="1.2vmax" as="i" fontWeight="550">
                         Title
@@ -184,17 +193,24 @@ function handleSubmitForm(data) {
                       />
                       <p className="err">{errors.address?.message}</p>
                     </FormControl>
-                    <Button type="submit">Submit</Button>
+                    <Button type="submit" colorScheme="green">
+                      Submit
+                    </Button>
                   </form>
                 </div>
                 <div className="next-button">
                   <div className="buttons">
-                    <Button onClick={lastDetail}>Back</Button>
+                    <Button
+                      onClick={lastDetail}
+                      color="white"
+                      backgroundColor="greenyellow"
+                    >
+                      Back
+                    </Button>
 
                     <Button colorScheme="red" onClick={nextDetail}>
                       Next
                     </Button>
-                    
                   </div>
                 </div>
               </div>
@@ -231,7 +247,6 @@ function handleSubmitForm(data) {
                     <Button colorScheme="red" onClick={finalSubmit}>
                       Submit
                     </Button>
-
                   </div>
                 </div>
               </div>

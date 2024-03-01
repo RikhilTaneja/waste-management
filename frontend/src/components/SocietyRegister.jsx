@@ -49,19 +49,19 @@ export default function SocietyRegister() {
     <div className="form-parent">
       <ToastContainer />
       <form className="form" onSubmit={handleSubmit(FormSubmitHandler)}>
-        <Text as="b" fontSize="2.3vmax" color="green">
+        <Text as="b" fontSize="2.3vmax">
           Register your society
         </Text>
-        <Text as="i" fontSize="1.5vmax" color="green">
+        <Text as="i" fontSize="1vmax">
           Enter the following details!
         </Text>
         <FormControl>
-          <FormLabel fontSize="1.2vmax" as="i" fontWeight="550" color="green">
+          <FormLabel fontSize="1.2vmax" as="i" fontWeight="550">
             Name
           </FormLabel>
           <Input
             type="text"
-            borderColor="green"
+            borderColor="#D0D5FA"
             {...register("name", {
               required: "name is required",
             })}
@@ -69,12 +69,12 @@ export default function SocietyRegister() {
           <p className="err">{errors.name?.message}</p>
         </FormControl>
         <FormControl>
-          <FormLabel fontSize="1.2vmax" as="i" fontWeight="550" color="green">
+          <FormLabel fontSize="1.2vmax" as="i" fontWeight="550">
             Location
           </FormLabel>
           <Input
             type="text"
-            borderColor="green"
+            borderColor="#D0D5FA"
             {...register("location", {
               required: "location is required",
             })}
@@ -82,12 +82,12 @@ export default function SocietyRegister() {
           <p className="err">{errors.location?.message}</p>
         </FormControl>
         <FormControl>
-          <FormLabel fontSize="1.2vmax" as="i" fontWeight="550" color="green">
+          <FormLabel fontSize="1.2vmax" as="i" fontWeight="550">
             No of residents
           </FormLabel>
           <Input
             type="number"
-            borderColor="green"
+            borderColor="#D0D5FA"
             {...register("residents", {
               required: "no of residents is required",
             })}

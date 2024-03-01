@@ -38,7 +38,7 @@ export default function Signup() {
   }, []);
 
   // console.log(watch())
-  const {login,setLogin} = useContext(AppContext)
+  const { login, setLogin } = useContext(AppContext);
   const FormSubmitHandler = (formData) => {
     console.log(formData);
     const id = toast.loading("Signing Up...");
@@ -47,9 +47,9 @@ export default function Signup() {
         .post("https://waste-management-theta.vercel.app/user/signup", formData)
         .then((result) => {
           // console.log(result.data);
-          setCookie("username",formData.username,365)
-          setCookie("auth-token",result.data,365)
-          setLogin(loginCheck())
+          setCookie("username", formData.username, 365);
+          setCookie("auth-token", result.data, 365);
+          setLogin(loginCheck());
           toast.update(id, {
             render: "Signed Up",
             type: "success",
@@ -74,7 +74,7 @@ export default function Signup() {
   return (
     <div className="form-parent">
       <ToastContainer />
-      <form className="form" onSubmit={handleSubmit(FormSubmitHandler)}>
+      <form className="form1" onSubmit={handleSubmit(FormSubmitHandler)}>
         <Text as="b" fontSize="2.3vmax">
           Sign Up
         </Text>
@@ -152,8 +152,12 @@ export default function Signup() {
               required: "Society is required",
             })}
           >
-            {society.map((e,i) => {
-              return <option key={i} value={e.name}>{e.name}</option>;
+            {society.map((e, i) => {
+              return (
+                <option key={i} value={e.name}>
+                  {e.name}
+                </option>
+              );
             })}
           </Select>
           <p className="err">{errors.society?.message}</p>
@@ -192,7 +196,7 @@ export default function Signup() {
           />
           <p className="err">{errors.contact?.email?.message}</p>
         </FormControl>
-        <Button type="submit" colorScheme="red">
+        <Button type="submit" colorScheme="green">
           Submit
         </Button>
       </form>
