@@ -6,10 +6,6 @@ import { FormControl, FormLabel, Input, Text, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-
-
-
-
 export default function SocietyRegister() {
   const navigate = useNavigate();
   const {
@@ -33,7 +29,7 @@ export default function SocietyRegister() {
             type: "success",
             isLoading: false,
           });
-          setLogin(loginCheck())
+          setLogin(loginCheck());
           setTimeout(() => {
             navigate("");
           }, 1200);
@@ -53,19 +49,19 @@ export default function SocietyRegister() {
     <div className="form-parent">
       <ToastContainer />
       <form className="form" onSubmit={handleSubmit(FormSubmitHandler)}>
-        <Text as="b" fontSize="2.3vmax">
+        <Text as="b" fontSize="2.3vmax" color="green">
           Register your society
         </Text>
-        <Text as="i" fontSize="1vmax">
+        <Text as="i" fontSize="1.5vmax" color="green">
           Enter the following details!
         </Text>
         <FormControl>
-          <FormLabel fontSize="1.2vmax" as="i" fontWeight="550">
+          <FormLabel fontSize="1.2vmax" as="i" fontWeight="550" color="green">
             Name
           </FormLabel>
           <Input
             type="text"
-            borderColor="#D0D5FA"
+            borderColor="green"
             {...register("name", {
               required: "name is required",
             })}
@@ -73,12 +69,12 @@ export default function SocietyRegister() {
           <p className="err">{errors.name?.message}</p>
         </FormControl>
         <FormControl>
-          <FormLabel fontSize="1.2vmax" as="i" fontWeight="550">
+          <FormLabel fontSize="1.2vmax" as="i" fontWeight="550" color="green">
             Location
           </FormLabel>
           <Input
             type="text"
-            borderColor="#D0D5FA"
+            borderColor="green"
             {...register("location", {
               required: "location is required",
             })}
@@ -86,19 +82,19 @@ export default function SocietyRegister() {
           <p className="err">{errors.location?.message}</p>
         </FormControl>
         <FormControl>
-          <FormLabel fontSize="1.2vmax" as="i" fontWeight="550">
+          <FormLabel fontSize="1.2vmax" as="i" fontWeight="550" color="green">
             No of residents
           </FormLabel>
           <Input
             type="number"
-            borderColor="#D0D5FA"
+            borderColor="green"
             {...register("residents", {
               required: "no of residents is required",
             })}
           />
           <p className="err">{errors.residents?.message}</p>
         </FormControl>
-        <Button type="submit" colorScheme="red">
+        <Button type="submit" colorScheme="green">
           Submit
         </Button>
       </form>
