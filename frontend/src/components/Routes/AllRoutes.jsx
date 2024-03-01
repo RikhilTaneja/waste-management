@@ -7,6 +7,8 @@ import SocietyRegister from '../SocietyRegister';
 import Login from '../Login';
 import Donation from '../Donation';
 import Educational from '../Educational';
+import Incentive from '../Incentive';
+import CardDetail from '../CardDetail';
 
 const AllRoutes = () => {
   return (
@@ -18,6 +20,9 @@ const AllRoutes = () => {
       <Route path='/society/signup' element={<SocietyRegister />} />
       <Route path='/donation' element={<Donation />} />
       <Route path='/education' element={<Educational />} />
+      <Route path='/incentive' element={<Incentive />} />
+      <Route path="/incentive/society/:id" element={<CardDetail/>} />
+
     </Routes>
   );
 };
