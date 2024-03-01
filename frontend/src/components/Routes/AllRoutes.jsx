@@ -11,7 +11,7 @@ import Incentive from "../Incentive";
 import CardDetail from "../CardDetail";
 import PrivateAuthRoute from "./PrivateAuthRoute";
 import Complaints from "../Complaints";
-import Faq from "../faq";
+import Faq from "../Faq";
 import About from "../About";
 
 const AllRoutes = () => {
