@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: 0.5s;
 }
 .container {
   display: flex;
@@ -105,6 +106,9 @@ a6[data-active] {
 .tag-subHeading {
   font-size: 1.2vmax;
 }
+.category-btn {
+  font-size: 1.2vmax;
+}
 .tag-line {
   display: flex;
   justify-content: center;
@@ -117,9 +121,10 @@ a6[data-active] {
 
   gap: 2vmax;
 }
+
 .complaint-parent {
   flex: 1;
-  padding: 0.5vmax;
+  padding: 1.5vmax;
   display: flex;
   flex-direction: column;
   gap: 3vmax;
@@ -137,12 +142,14 @@ a6[data-active] {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 50px;
 }
 .progress-bar {
   /* border: 2px blue solid; */
   background-color: aliceblue;
   height: 2vh;
-  width: 80vw;
+  border-radius: 50px;
+  width: 50vw;
 }
 .progress {
   height: 100%;
@@ -167,6 +174,17 @@ a6[data-active] {
   flex-direction: column;
   align-items: center;
   width: 47vw;
+  padding: 2vmin;
+  border-radius: 10px;
+  border: 3px green solid;
+  background-color: #fefed4;
+  gap: 2vmin;
+}
+.form1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 43vw;
   padding: 2vmin;
   border-radius: 10px;
   border: 3px green solid;
@@ -249,6 +267,15 @@ a {
   .moto {
     font-size: 4.3vmax;
     text-align: center;
+  }
+  .category-btn {
+    font-size: 50vmax;
+  }
+  .form {
+    width: 70vw;
+  }
+  .form1 {
+    width: 70vw;
   }
 }
 
