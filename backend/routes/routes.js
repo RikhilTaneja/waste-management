@@ -19,6 +19,7 @@ const Complaint = require("../models/complaints");
 // making incoming data as in json format
 const app = express();
 app.use(express.json());
+//using dotenv for env. variables
 require("dotenv").config();
 userControl.use(express.json());
 service.use(express.json());
