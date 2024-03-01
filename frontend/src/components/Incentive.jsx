@@ -33,7 +33,7 @@ export default function Listings() {
   let randomLoader = Math.floor(Math.random() * 8);
 
   const username = getCookie("username");
-  const {login,setLogin} = useContext(AppContext)
+  const { login, setLogin } = useContext(AppContext);
   // console.log(username)
   useEffect(() => {
     setTimeout(() => {
@@ -50,24 +50,22 @@ export default function Listings() {
   }, []);
   return (
     <div id="listings-parent">
-      
       {posts.length == 0 ? (
         <div className="loading">{loadersArray[randomLoader]}</div>
       ) : (
         <div
           style={{
             display: "flex",
+            flex:"1",
             flexDirection: "column",
             gap: "7vmin",
             alignItems: "center",
           }}
         >
-          <div className="username">
-            Hello, {login ? username : "Guest"}!
-          </div>
+          <div className="username">Hello, {login ? username : "Guest"}!</div>
           <SimpleGrid columns={[2, 2, 3, 4]} spacing={10}>
             {posts.map((e, i) => {
-              return <Card data={posts[i]} key={i} />;
+              return <Card data={posts[i]} key={i}  />;
             })}
           </SimpleGrid>
         </div>

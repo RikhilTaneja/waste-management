@@ -16,7 +16,6 @@ import {
   RiseLoader,
 } from "react-spinners";
 
-
 export default function CardDetail() {
   let loadersArray = [
     <BarLoader color="green" />,
@@ -63,18 +62,17 @@ export default function CardDetail() {
       {residentsData.length == 0 ? (
         <div className="loading">{loadersArray[randomLoader]}</div>
       ) : (
-        <div>
-          {societyData.name}
-        <div>
-          {residentsData.map((resident) => (
-            <div >
-              {resident.name}
-            </div>
-          ))}
+        <div className="society-data">
+          <div className="society-name">{societyData.name}</div>
+          <div className="society-users">
+            {residentsData.map((resident) => (
+              <div>
+                <li>{resident.name}</li>
+              </div>
+            ))}
           </div>
         </div>
       )}
     </div>
-      
   );
 }

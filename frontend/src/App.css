@@ -317,11 +317,11 @@ a {
 
 #listings-parent {
   flex: 1;
-  padding: 2vmin 10vmin;
-  display: flex;
+  padding: 2vmin;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 }
 .username {
   color: rgb(77, 125, 5);
@@ -331,10 +331,24 @@ a {
 .card {
   display: flex;
   flex-direction: column;
+
   align-items: center;
+  justify-content: space-between;
+  gap: 2vmax;
+  height: 100%;
+  cursor: pointer;
 
   transition: all 0.2s;
 }
+.loading {
+  width: 100vw;
+  height: 85vh;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .card-img > img:hover {
   box-shadow: 0px 0px 4px #1b345b;
 }
@@ -352,7 +366,7 @@ a {
   align-self: flex-end;
 }
 .card-tagline {
-  font-size: 1vmax;
+  font-size: 1.2vmax;
   font-weight: 700;
 }
 .newPostBtn {
@@ -360,7 +374,25 @@ a {
   bottom: 3vmin;
   right: 3vmin;
 }
-
+/* card-detail */
+.society-name {
+  width: 35vmax;
+  height: 7vmax;
+  text-align: center;
+  font-size: 5vmax;
+  padding-top: 2vmax;
+  /* border: 3px green solid; */
+  /* border-radius: 20px; */
+}
+.society-users {
+  font-size: 2.3vmax;
+}
+.society-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9vmax;
+}
 
 /* Media query */
 @media (max-width: 600px) {
