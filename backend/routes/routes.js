@@ -170,7 +170,15 @@ societyControl.put("/edit/:id", validateSociety, wrapAsync(async (req, res) => {
     }
     res.send("Updated!");
 }));
+societyControl.get("/details/:id",async(req,res)=>{
+    let {id} = req.params
+    let result = await Society.findById(id)
+    let result2 = await User.find({society:id})
+    // console.log("result: ", result);
+    // console.log("result2: ", result2);
+    res.json({societyData:result,residentsData:result2})
 
+})
 // ========================================================
 // COMPLAINT ROUTES
 // ========================================================
