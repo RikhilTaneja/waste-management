@@ -19,7 +19,7 @@ This project addresses the critical issue of improper waste disposal within resi
 
 ## Deployment Links
 - **Backend:** [https://backend-waste-management.vercel.app/](https://backend-waste-management.vercel.app/)
-- **Frontend:** [https://frontend-pi-ten-19.vercel.app/](https://frontend-pi-ten-19.vercel.app/)
+- **Frontend:** [https://frontend-pi-ten-19.vercel.app/](https://wastex.vercel.app/)
 <br>
 
 ## Features 
